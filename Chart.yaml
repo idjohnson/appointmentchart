@@ -1,0 +1,4 @@
+apiVersion: v2
+name: EasyAppointments
+description: A Helm chart for EasyAppointments and MySQL
+version: 0.1.0

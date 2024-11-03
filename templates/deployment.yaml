@@ -1,0 +1,66 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: easyappointments
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: easyappointments
+  template:
+    metadata:
+      labels:
+        app: easyappointments
+    spec:
+      containers:
+        - name: easyappointments
+          image: {{ .Values.easyappointments.image }}
+          ports:
+            - containerPort: 80
+          env:
+            - name: BASE_URL
+              value: {{ .Values.easyappointments.env.BASE_URL }}
+            - name: DEBUG_MODE
+              value: {{ .Values.easyappointments.env.DEBUG_MODE }}
+            - name: DB_HOST
+              value: {{ .Values.easyappointments.env.DB_HOST }}
+            - name: DB_NAME
+              value: {{ .Values.easyappointments.env.DB_NAME }}
+            - name: DB_USERNAME
+              value: {{ .Values.easyappointments.env.DB_USERNAME }}
+            - name: DB_PASSWORD
+              value: {{ .Values.easyappointments.env.DB_PASSWORD }}
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mysql
+  template:
+    metadata:
+      labels:
+        app: mysql
+    spec:
+      containers:
+        - name: mysql
+          image: {{ .Values.mysql.image }}
+          ports:
+            - containerPort: 3306
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              value: {{ .Values.mysql.env.MYSQL_ROOT_PASSWORD }}
+            - name: MYSQL_DATABASE
+              value: {{ .Values.mysql.env.MYSQL_DATABASE }}
+          volumeMounts:
+            - name: mysql-persistent-storage
+              mountPath: /var/lib/mysql
+      volumes:
+        - name: mysql-persistent-storage
+          persistentVolumeClaim:
+            claimName: mysql-pvc
+

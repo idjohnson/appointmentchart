@@ -1,0 +1,25 @@
+easyappointments:
+  image: easyappointments:1.4.3
+  service:
+    type: ClusterIP
+    port: 80
+  env:
+    BASE_URL: http://localhost
+    DEBUG_MODE: "TRUE"
+    DB_HOST: mysql
+    DB_NAME: easyappointments
+    DB_USERNAME: root
+    DB_PASSWORD: secret
+
+mysql:
+  image: mysql:8.0
+  service:
+    type: ClusterIP
+    port: 3306
+  env:
+    MYSQL_ROOT_PASSWORD: secret
+    MYSQL_DATABASE: easyappointments
+  persistence:
+    enabled: true
+    size: 1Gi
+    storageClassName: "local-path"
