@@ -19,17 +19,23 @@ spec:
             - containerPort: 80
           env:
             - name: BASE_URL
-              value: {{ .Values.easyappointments.env.BASE_URL }}
+              value: "{{ .Values.easyappointments.env.BASE_URL }}"
             - name: DEBUG_MODE
-              value: {{ .Values.easyappointments.env.DEBUG_MODE }}
+              value: "{{ .Values.easyappointments.env.DEBUG_MODE }}"
             - name: DB_HOST
-              value: {{ .Values.easyappointments.env.DB_HOST }}
+              value: "{{ .Values.easyappointments.env.DB_HOST }}"
             - name: DB_NAME
-              value: {{ .Values.easyappointments.env.DB_NAME }}
+              value: "{{ .Values.easyappointments.env.DB_NAME }}"
             - name: DB_USERNAME
-              value: {{ .Values.easyappointments.env.DB_USERNAME }}
+              value: "{{ .Values.easyappointments.env.DB_USERNAME }}"
             - name: DB_PASSWORD
-              value: {{ .Values.easyappointments.env.DB_PASSWORD }}
+              value: "{{ .Values.easyappointments.env.DB_PASSWORD }}"
+            - name: GOOGLE_SYNC_FEATURE
+              value: "{{ .Values.easyappointments.env.GOOGLE_SYNC_FEATURE }}"
+            - name: GOOGLE_CLIENT_ID
+              value: "{{ .Values.easyappointments.env.GOOGLE_CLIENT_ID }}"
+            - name: GOOGLE_CLIENT_SECRET
+              value: "{{ .Values.easyappointments.env.GOOGLE_CLIENT_SECRET }}"
 
 ---
 apiVersion: apps/v1
